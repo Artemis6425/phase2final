@@ -5,29 +5,40 @@ class UsersController < ApplicationController
         erb :'/users/index'
     end
 
-    get '/users/new' do
-        erb :'/users/new'   #form posts to /users/new
+    get '/signup' do
+        @message = session[:message]
+        session[:message] = nil
+        erb :'/users/new'   #form posts to /create/user
     end
 
-    post '/users/new' do
+    post '/create/user' do
         puts params
         @user = User.new(name: params["name"], email: params["email"], password: params["password"])
-        @user.save
-        session[:user_id] = @user.id
-        redirect '/users'
+        if !@user.save
+            session[:message] = "Didn't seem to work. Did you mistype, or maybe do you already have an account?"
+            redirect to '/signup'
+        else
+            @user.save
+            session[:message] = "Success! Please Login to Verify Your Information."
+            redirect '/login'
+        end
     end
 
     get '/login' do
+        @message = session[:message]
+        session[:message] = nil
         erb :'/users/login' #form posts to /users
     end
 
     post '/users' do    #I'M LOGGED IN
-        @user = User.find_by(email: params[:email], password: params[:password])
-        if @user
+        @user = User.find_by(email: params[:email])
+        if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
             redirect '/users/:id'
+        else
+            session[:message] = "Incorrect Email or Password"
+            redirect '/users/login'
         end
-        redirect '/users/login'
     end
 
     get '/logout' do
