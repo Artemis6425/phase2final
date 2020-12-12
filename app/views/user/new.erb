@@ -1,0 +1,13 @@
+<h1>Create an account to post your times on the board!</h1>
+    <% if @message %>
+        <h3><%= @message %></h3><br/>
+    <% end %>
+<form method="post" action="/create/user">
+    <label for="first_name">Username: </label>
+        <input type="text"name="name" id="name" required><br/>
+    <label for="email">Email: </label>
+        <input type="email"name="email" id="email" required><br/>
+    <label for="password">Password: </label>
+        <input type="password"name="password" id="password" required><br/>
+    <input type="submit" id="submit" value="Create Account">
+</form>

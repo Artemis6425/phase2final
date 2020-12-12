@@ -2,13 +2,13 @@ class UsersController < ApplicationController
 
     get '/users' do
         @users = User.all
-        erb :'/users/index'
+        erb :'/user/index'
     end
 
     get '/signup' do
         @message = session[:message]
         session[:message] = nil
-        erb :'/users/new'   #form posts to /create/user
+        erb :'/user/new'   #form posts to /create/user
     end
 
     post '/create/user' do
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     get '/login' do
         @message = session[:message]
         session[:message] = nil
-        erb :'/users/login' #form posts to /users
+        erb :'/user/login' #form posts to /users
     end
 
     post '/users' do    #I'M LOGGED IN
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
     get '/users/:id' do
         @user = User.find(params[:id])
-        erb :'/owners/show'
+        erb :'/user/show'
     end
 
 

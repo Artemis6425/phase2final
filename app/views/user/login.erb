@@ -1,0 +1,11 @@
+<h1>Login to post your times on the board!</h1>
+    <% if @message %>
+        <h3><%= @message %></h3><br/>
+    <% end %>
+<form method="post" action="/users">
+    <label for="email">Email: </label>
+        <input type="email"name="email" id="email" required><br/>
+    <label for="password">Password: </label>
+        <input type="password"name="password" id="password" required><br/>
+    <input type="submit" id="submit" value="Login">
+</form>
