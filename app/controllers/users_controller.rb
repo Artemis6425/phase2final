@@ -34,7 +34,7 @@ class UsersController < ApplicationController
         @user = User.find_by(email: params[:email])
         if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
-            redirect '/users/:id'
+            redirect '/runs'
         else
             session[:message] = "Incorrect Email or Password"
             redirect '/users/login'
@@ -48,7 +48,6 @@ class UsersController < ApplicationController
 
     get '/users/:id' do
         @user = User.find(params[:id])
-        @user_runs = Run.find_by_user_id(@user.id)
         erb :'/owners/show'
     end
 

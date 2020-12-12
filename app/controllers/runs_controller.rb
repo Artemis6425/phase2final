@@ -1,6 +1,8 @@
 class RunsController < ApplicationController
 
     get '/runs' do
+        @mesage = session[:message]
+        session[:message] = nil
         @runs = Run.all
         erb :'/run/index'
     end
@@ -11,15 +13,15 @@ class RunsController < ApplicationController
 
     get '/runs/:id' do
         @run = Run.find(params[:id])
-        @user = User.find_by_id(@run.user_id)
         erb :'/run/show'
     end
 
     get '/runs/:id/edit' do
         @run = Run.find(params[:id])
-        if @run.user_id == session.user_id           #something like that
+        if @run.user.id == session.user_id           #something like that
             erb :'/run/edit'
         else
+            session[:message] = "You don't have permission to edit this run."
             redirect '/runs'
         end
     end
