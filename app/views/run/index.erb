@@ -1,0 +1,14 @@
+<h1>Super Mario 64 70 Star Leaderboard</h1>
+<% if @message %>
+    <h3><%= @message %></h3><br/>
+<% end %>
+<a href="/runs/new">Submit a run here!</a>
+<a href="/login">something here</a><br/>
+<% if @runs.length == 0 %>
+    <h5>There isn't any runs submitted. Will you be the first?</h5>
+<% else %>
+    <% temp = 1 %>
+    <% while temp <= runs.length do%>
+        <h5><%= temp %>. <%= runs[temp].user.name %>        <%= runs[temp].time %>        <%= runs[temp].date %>        <%= runs[temp].note %></h5>
+        <% temp +=1%>
+    <% end%>
