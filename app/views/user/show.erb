@@ -1,4 +1,7 @@
 <h1> <%= @user.name %>'s Times </h1>
+<% if @message %>
+    <h3><%= @message %></h3><br/>
+<% end %>
 <a href="/runs">Back to the leaderboard</a><br/>
 
 <% if @user.run.length == 0 %>

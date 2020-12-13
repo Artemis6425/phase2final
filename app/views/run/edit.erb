@@ -1,0 +1,21 @@
+<h1>Edit your time!</h1>
+    <% if @message %>
+        <h3><%= @message %></h3><br/>
+    <% end %>
+<form method="post" action="/edit/run">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <label for="time">Time: </label>
+        <input type="text"name="time" id="time" value="<%= @run.time %>" required><br/>
+    <label for="date">Date: </label>
+    <input type="hidden" id="id" name="id" value="<%= @run.id %>"><br/>
+        <input type="date"name="date" id="date" value="<%= @run.date %>" required><br/>
+    <label for="note">Note: </label>
+        <input type="text"name="note" id="note" value="<%= @run.note %>"><br/>
+    <input type="submit" id="submit" value="Submit Run">
+</form>
+
+<form method="post" action="/delete/run">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="id" value="<%= @run.id%>">
+    <input class="chore-delete-button" type="submit" value="Delete Run">
+</form>

@@ -37,7 +37,7 @@ class UsersController < ApplicationController
             redirect '/runs'
         else
             session[:message] = "Incorrect Email or Password"
-            redirect '/users/login'
+            redirect '/login'
         end
     end
 
@@ -47,6 +47,8 @@ class UsersController < ApplicationController
     end
 
     get '/users/:id' do
+        @message = session[:message]
+        session[:message] = nil
         @user = User.find(params[:id])
         erb :'/user/show'
     end
