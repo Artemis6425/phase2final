@@ -1,0 +1,19 @@
+<h1> <%= @user.name %>'s Times </h1>
+<a href="/runs">Back to the leaderboard</a><br/>
+
+<% if @user.run.length == 0 %>
+    <h5>They don't have any times submitted.</h5>
+<% else %>
+<% temp = 1 %>
+    <% if session[:user_id] == @user.id %>
+        <% @user.run.order(:time).each do |run| %>
+            <h5><a href="/runs/<%=run.id%>/edit">Edit run</a>&nbsp;&nbsp;<%= temp %>.&nbsp;&nbsp;<%= run.time %>&nbsp;&nbsp;&nbsp;&nbsp;<%= run.date %>&nbsp;&nbsp;&nbsp;&nbsp;<%= run.note %></h5>
+            <% temp +=1%>
+        <% end %>
+    <% else %>
+        <% @user.run.order(:time).each do |run| %>
+            <h5><%= temp %>.&nbsp;&nbsp;<%= run.time %>&nbsp;&nbsp;&nbsp;&nbsp;<%= run.date %>&nbsp;&nbsp;&nbsp;&nbsp;<%= run.note %></h5>
+            <% temp +=1%>
+        <% end %>
+    <% end %>
+<% end %>

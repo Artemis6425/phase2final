@@ -2,11 +2,12 @@
 <% if @message %>
     <h3><%= @message %></h3><br/>
 <% end %>
-<a href="/runs/new">Submit a run here!</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <% if session[:user_id] %>
+    <a href="/runs/new">Submit a run here!</a>&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="/logout">Log out</a><br/>
 <% else %>
-    <a href="/login">Log in to submit here</a><br/>
+    <a href="/login">Log in</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/signup">Sign up</a><br/>
 <% end %>
 <% if @runs.length == 0 %>
     <h5>There isn't any runs submitted. Will you be the first?</h5>
