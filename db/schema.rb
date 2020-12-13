@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2) do
 
   create_table "runs", force: :cascade do |t|
     t.integer "user_id"
-    t.time    "time"
+    t.string  "time"
     t.date    "date"
     t.string  "note"
   end

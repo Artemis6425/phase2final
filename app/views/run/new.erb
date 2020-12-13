@@ -1,0 +1,14 @@
+<h1>Post your new time to the board!</h1>
+    <% if @message %>
+        <h3><%= @message %></h3><br/>
+    <% end %>
+<form method="post" action="/create/run">
+    <label for="time">Time: </label>
+        <input type="text"name="time" id="time" required><br/>
+    <label for="date">Date: </label>
+    <input type="hidden" id="user_id" name="user_id" value="<%= session[:user_id] %>"><br/>
+        <input type="date"name="date" id="date" required><br/>
+    <label for="note">Note: </label>
+        <input type="text"name="note" id="note"><br/>
+    <input type="submit" id="submit" value="Submit Run">
+</form>
