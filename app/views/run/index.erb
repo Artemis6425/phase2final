@@ -3,13 +3,17 @@
     <h3><%= @message %></h3><br/>
 <% end %>
 <a href="/runs/new">Submit a run here!</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="/login">something here</a><br/>
+<% if session[:user_id] %>
+    <a href="/logout">Log out</a><br/>
+<% else %>
+    <a href="/login">Log in to submit here</a><br/>
+<% end %>
 <% if @runs.length == 0 %>
     <h5>There isn't any runs submitted. Will you be the first?</h5>
 <% else %>
     <% temp = 1 %>
     <% @runs.order(:time).each do |run| %>
-        <h5><%= temp %>.&nbsp;&nbsp;<%= run.user.name %>&nbsp;&nbsp;&nbsp;&nbsp;<%= run.time %>&nbsp;&nbsp;&nbsp;&nbsp;<%= run.date %>&nbsp;&nbsp;&nbsp;&nbsp;<%= run.note %></h5>
+        <h5><%= temp %>.&nbsp;&nbsp;<a href="/users/<%=run.user_id%>"><%= run.user.name %></a>&nbsp;&nbsp;&nbsp;&nbsp;<%= run.time %>&nbsp;&nbsp;&nbsp;&nbsp;<%= run.date %>&nbsp;&nbsp;&nbsp;&nbsp;<%= run.note %></h5>
         <% temp +=1%>
     <% end %>
 <% end %>
